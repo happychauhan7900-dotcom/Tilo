@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2c3e50;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.5);
+            width: 320px;
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 32px;
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.1s;
+        }
+
+        button:active { transform: scale(0.95); }
+        
+        /* Button Colors */
+        .btn-num { background-color: #fff; color: #2c3e50; border: 1px solid #bdc3c7; }
+        .btn-op { background-color: #f39c12; color: white; }
+        .btn-clear { background-color: #e74c3c; color: white; }
+        .btn-equal { background-color: #27ae60; color: white; grid-column: span 2; }
+
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" readonly placeholder="0">
+    <div class="buttons">
+        <button class="btn-clear" onclick="clearDisplay()">C</button>
+        <button class="btn-op" onclick="appendToDisplay('/')">÷</button>
+        <button class="btn-op" onclick="appendToDisplay('*')">×</button>
+        <button class="btn-op" onclick="appendToDisplay('-')">−</button>
+        
+        <button class="btn-num" onclick="appendToDisplay('7')">7</button>
+        <button class="btn-num" onclick="appendToDisplay('8')">8</button>
+        <button class="btn-num" onclick="appendToDisplay('9')">9</button>
+        <button class="btn-op" onclick="appendToDisplay('+')">+</button>
+        
+        <button class="btn-num" onclick="appendToDisplay('4')">4</button>
+        <button class="btn-num" onclick="appendToDisplay('5')">5</button>
+        <button class="btn-num" onclick="appendToDisplay('6')">6</button>
+        <button class="btn-num" onclick="appendToDisplay('.')">.</button>
+
+        <button class="btn-num" onclick="appendToDisplay('1')">1</button>
+        <button class="btn-num" onclick="appendToDisplay('2')">2</button>
+        <button class="btn-num" onclick="appendToDisplay('3')">3</button>
+        <button class="btn-num" onclick="appendToDisplay('0')">0</button>
+        
+        <button class="btn-equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function appendToDisplay(input) {
+        display.value += input;
+    }
+
+    function clearDisplay() {
+        display.value = "";
+    }
+
+    function calculate() {
+        try {
+            if(display.value === "") return;
+            // Calculate the result
+            display.value = eval(display.value);
+        } catch (error) {
+            display.value = "Error";
+            setTimeout(() => display.value = "", 1500);
+        }
+    }
+</script>
+
+</body>
+</html>
